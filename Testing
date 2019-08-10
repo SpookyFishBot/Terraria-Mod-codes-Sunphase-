@@ -1,0 +1,55 @@
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria;
+using Microsoft.Xna.Framework;
+
+namespace modname.Items
+{
+    public class Item : ModItem
+    {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Item");
+            Tooltip.SetDefault("This is a modded sword.");
+        }
+        public override void SetDefaults()
+        {
+            item.damage = 50; //size multiplied by 3
+            item.melee = true;
+            item.width = 120;
+            item.height = 120;
+            item.useTime = 10; //default: 20
+            item.useAnimation = 20;
+            item.useStyle = 1;
+            item.knockBack = 6;
+            item.value = 10000;
+            item.rare = 2;
+            item.UseSound = SoundID.Item2;
+            item.autoReuse = true;
+            item.shoot = 10;
+            item.shootSpeed = 6f; //shoot speed default(6f)
+                                  //item.useAmmo = AmmoID.Arrow;
+            item.shoot = ProjectileID.DemonScythe;
+        }
+        public void DamageNPC(Player myPlayer, NPC npc, ref int damage, ref float knockback)
+        {
+            npc.AddBuff(BuffID.OnFire, 6000, true);
+            // Add the buff    
+            //npc.AddBuff("On Fire!", 6000, true);
+            //npc.AddBuff(2, 2000);
+        }
+        public override void AddRecipes()
+        {
+            ModRecipe recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.DirtBlock, 10);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
+        }
+
+    }
+
+
+
+}
+
